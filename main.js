@@ -1,21 +1,32 @@
-const location1 = 3
-const location2 = 4
-const location3 = 5
+const randomLoc = Math.floor(Math.random() * 5);
+const location1 = randomLoc
+const location2 = location1 + 1
+const location3 = location2 + 1
 
 let isSunk = false
 let guess
 let hits = 0
+let guesses = 0
 
 while (isSunk === false) {
     guess = +prompt('Fire, Enter number 0-6')
-    if (guess === location1 || guess === location2 || guess === location3) {
-        alert('HIT')
-        hits += 1
-        if (hits === 3) {
-            isSunk = true
-            alert("You sank my battleship")
-        }
+
+    if (guess < 0 || guess > 6) {
+        alert("Please enter a number of 0-6")
     } else {
-        alert('MISS')
+        guesses += 1
+        if (guess === location1 || guess === location2 || guess === location3) {
+            alert('HIT')
+            hits += 1
+            if (hits === 3) {
+                isSunk = true
+                alert("You sank my battleship")
+            }
+        } else {
+            alert('MISS')
+        }
     }
 }
+
+const stats = 'You have ' + hits + ' hits out of ' + guesses + ' shots.'
+alert(stats)
